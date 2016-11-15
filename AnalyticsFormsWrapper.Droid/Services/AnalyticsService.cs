@@ -17,9 +17,9 @@ namespace AnalyticsFormsWrapper.Droid.Services
     {
         const string clientId_key = "clientId";
 
-        static GoogleAnalytics analyticsInstance;
-        static Tracker analyticsTrackerInternal;
         static AnalyticsService thisRef;
+        static Tracker analyticsTrackerInternal;
+        static GoogleAnalytics analyticsInstance;
         static AnalyticsProductMapper mapper;
 
         public bool OptOut {
@@ -39,17 +39,17 @@ namespace AnalyticsFormsWrapper.Droid.Services
 
         public string ClientId {
             get {
-                return AnalyticsTracker.Get (clientId_key);
+                return analyticsTracker.Get (clientId_key);
             }
         }
 
         public bool EnableAdvertisingFeatures {
             set {
-                AnalyticsTracker.EnableAdvertisingIdCollection (value);
+                analyticsTracker.EnableAdvertisingIdCollection (value);
             }
         }
 
-        private Tracker AnalyticsTracker {
+        private Tracker analyticsTracker {
             set { analyticsTrackerInternal = value; }
             get {
                 if (analyticsTrackerInternal == null) {
@@ -76,10 +76,10 @@ namespace AnalyticsFormsWrapper.Droid.Services
 
             mapper = new AnalyticsProductMapper ();
 
-            AnalyticsTracker = analyticsInstance.NewTracker (gaTrackingId);
-            AnalyticsTracker.EnableExceptionReporting (true);
-            AnalyticsTracker.EnableAdvertisingIdCollection (true);
-            AnalyticsTracker.Set (clientId_key, Guid.NewGuid ().ToString ());
+            analyticsTracker = analyticsInstance.NewTracker (gaTrackingId);
+            analyticsTracker.EnableExceptionReporting (true);
+            analyticsTracker.EnableAdvertisingIdCollection (true);
+            analyticsTracker.Set (clientId_key, Guid.NewGuid ().ToString ());
         }
 
         public void ManualDispatch ()
@@ -98,7 +98,7 @@ namespace AnalyticsFormsWrapper.Droid.Services
             CustomMetric customMetric
         )
         {
-            AnalyticsTracker.SetScreenName (screenName);
+            analyticsTracker.SetScreenName (screenName);
 
             var builder = new HitBuilders.ScreenViewBuilder();
 
@@ -110,6 +110,9 @@ namespace AnalyticsFormsWrapper.Droid.Services
 
             if (!string.IsNullOrWhiteSpace (campaignUrl))
                 builder.SetCampaignParamsFromUrl (campaignUrl);
+
+            if (promotion != null)
+                builder.AddPromotion (generatePromotion (promotion));
 
             if (products != null) {
                 foreach (var p in products) {
@@ -125,25 +128,24 @@ namespace AnalyticsFormsWrapper.Droid.Services
                     }
                 }
             }
-            AnalyticsTracker.Send (builder.Build ());
+            analyticsTracker.Send (builder.Build ());
         }
 
         public void TrackEvent (
-            string category,
-            string action,
-            string label,
-            long value,
+            EventData eventData,
             CustomDimension customDimension,
             CustomMetric customMetric
         )
         {
             var builder = new HitBuilders.EventBuilder()
-                .SetAction(action)
-                .SetLabel(label)
-                .SetValue(value);
+                                         .SetCategory(eventData.EventCategory)
+                                         .SetAction(eventData.EventAction);
 
-            if (!string.IsNullOrWhiteSpace (category))
-                builder.SetCategory (category);
+            if (!string.IsNullOrWhiteSpace (eventData?.EventLabel))
+                builder.SetLabel (eventData.EventLabel);
+
+            if (!string.IsNullOrWhiteSpace (eventData?.EventLabel))
+                builder.SetValue (eventData.Id);
 
             if (customDimension != null)
                 builder.SetCustomDimension (customDimension.DimensionIndex, customDimension.DimensionValue);
@@ -151,22 +153,29 @@ namespace AnalyticsFormsWrapper.Droid.Services
             if (customMetric != null)
                 builder.SetCustomMetric (customMetric.MetricIndex, customMetric.MetricValue);
 
-            AnalyticsTracker.Send (builder.Build ());
+            analyticsTracker.Send (builder.Build ());
         }
 
-        public void TrackException (string ExceptionMessageToTrack, bool isFatalException)
+        public void TrackException (
+            string ExceptionMessage,
+            bool isFatalException
+        )
         {
-            AnalyticsTracker.Send (
+            analyticsTracker.Send (
                 new HitBuilders.ExceptionBuilder ()
-                .SetDescription (ExceptionMessageToTrack)
+                .SetDescription (ExceptionMessage)
                 .SetFatal (isFatalException)
                 .Build ()
             );
         }
 
-        public void TrackAppSocial (string socialNetworkName, string socialAction, string socialTarget)
+        public void TrackSocial (
+            string socialNetworkName,
+            string socialAction,
+            string socialTarget
+        )
         {
-            AnalyticsTracker.Send (
+            analyticsTracker.Send (
                 new HitBuilders.SocialBuilder ()
                 .SetNetwork (socialNetworkName)
                 .SetAction (socialAction)
@@ -175,14 +184,14 @@ namespace AnalyticsFormsWrapper.Droid.Services
             );
         }
 
-        public void TrackAppTiming (
+        public void TrackTiming (
             string categroy,
             string label,
             long value,
             string variable
         )
         {
-            AnalyticsTracker.Send (
+            analyticsTracker.Send (
                 new HitBuilders.TimingBuilder ()
                 .SetCategory (categroy)
                 .SetLabel (label)
@@ -195,23 +204,42 @@ namespace AnalyticsFormsWrapper.Droid.Services
         public void SetCurrencyCode (string currencyCode)
         {
             if (!string.IsNullOrWhiteSpace (currencyCode))
-                AnalyticsTracker.Set ("&cu", currencyCode);
+                analyticsTracker.Set ("&cu", currencyCode);
         }
 
         public void TrackUserId (string userid)
         {
             if (!string.IsNullOrWhiteSpace (userid)) {
-                AnalyticsTracker.Set ("&uid", userid);
+                analyticsTracker.Set ("&uid", userid);
                 var builder = new HitBuilders.EventBuilder();
-                AnalyticsTracker.Send (builder.Build ());
+                analyticsTracker.Send (builder.Build ());
             }
+        }
+
+        Promotion generatePromotion (PromotionData prom)
+        {
+            var promotion = new Promotion();
+
+            if (!string.IsNullOrEmpty (prom?.Id))
+                promotion.SetId (prom.Id);
+
+            if (!string.IsNullOrEmpty (prom?.Name))
+                promotion.SetName (prom.Name);
+
+            if (!string.IsNullOrEmpty (prom?.Creative))
+                promotion.SetCreative (prom.Creative);
+
+            if (!string.IsNullOrEmpty (prom?.Position))
+                promotion.SetPosition (prom.Position);
+
+            return promotion;
         }
 
         ProductAction generateCheckoutProductAction (ActionData actionData, ProductActions productAction)
         {
             var pAction = new ProductAction (productAction.ToString ());
 
-            if (!string.IsNullOrEmpty (actionData?.Id) 
+            if (!string.IsNullOrEmpty (actionData?.Id)
                 && (productAction == ProductActions.purchase
                     || productAction == ProductActions.refund))
                 return pAction;
