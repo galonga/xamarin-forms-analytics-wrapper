@@ -3,7 +3,7 @@ using XamarinFormsAnalyticsWrapper.Models;
 using Foundation;
 using Google.Analytics;
 
-namespace XamarinFormsAnalyticsWrapper.iOS.Mappper
+namespace XamarinFormsAnalyticsWrapper.iOS.Mapper
 {
     public class AnalyticsProductMapper
     {

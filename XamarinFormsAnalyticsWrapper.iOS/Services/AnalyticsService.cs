@@ -6,7 +6,7 @@ using XamarinFormsAnalyticsWrapper.Exceptions;
 using System.Collections.Generic;
 using XamarinFormsAnalyticsWrapper.Models;
 using XamarinFormsAnalyticsWrapper.Enums;
-using XamarinFormsAnalyticsWrapper.iOS.Mappper;
+using XamarinFormsAnalyticsWrapper.iOS.Mapper;
 using Foundation;
 
 [assembly: Dependency (typeof (XamarinFormsAnalyticsWrapper.iOS.Services.AnalyticsService))]
@@ -80,6 +80,7 @@ namespace XamarinFormsAnalyticsWrapper.iOS.Services
             Gai.SharedInstance.OptOut = false;
             Gai.SharedInstance.DispatchInterval = dispatchIntervalInSeconds;
             analyticsTracker = Gai.SharedInstance.GetTracker (gaTrackingId);
+            mapper = new AnalyticsProductMapper ();
         }
 
         public void ManualDispatch ()
@@ -159,8 +160,8 @@ namespace XamarinFormsAnalyticsWrapper.iOS.Services
         }
 
         public void TrackSocial (
-            string socialNetworkName, 
-            string socialAction, 
+            string socialNetworkName,
+            string socialAction,
             string socialTarget
         )
         {
@@ -168,9 +169,9 @@ namespace XamarinFormsAnalyticsWrapper.iOS.Services
         }
 
         public void TrackTiming (
-            string categroy, 
-            string label, 
-            long value, 
+            string categroy,
+            string label,
+            long value,
             string variable
         )
         {
@@ -216,36 +217,39 @@ namespace XamarinFormsAnalyticsWrapper.iOS.Services
         {
             var pAction = new EcommerceProductAction().SetAction (productAction.ToString ());
 
-            if (!string.IsNullOrEmpty (actionData?.Id)
-                && (productAction == ProductActions.purchase
-                    || productAction == ProductActions.refund))
-                return pAction;
-            else
-                pAction.SetTransactionId (actionData.Id);
+            if (actionData != null) {
+                if (string.IsNullOrEmpty (actionData?.Id)
+                    && (productAction == ProductActions.purchase
+                        || productAction == ProductActions.refund)) {
+                    return pAction;
+                } else if (!string.IsNullOrEmpty (actionData?.Id)) {
+                    pAction.SetTransactionId (actionData.Id);
+                }
 
-            if (!string.IsNullOrEmpty (actionData?.Affiliation))
-                pAction.SetAffiliation (actionData.Affiliation);
+                if (!string.IsNullOrEmpty (actionData?.Affiliation))
+                    pAction.SetAffiliation (actionData.Affiliation);
 
-            if (actionData?.Revenue != 0)
-                pAction.SetRevenue (new NSNumber (actionData.Revenue));
+                if (actionData?.Revenue != 0)
+                    pAction.SetRevenue (new NSNumber (actionData.Revenue));
 
-            if (actionData?.Tax != 0)
-                pAction.SetTax (new NSNumber (actionData.Tax));
+                if (actionData?.Tax != 0)
+                    pAction.SetTax (new NSNumber (actionData.Tax));
 
-            if (actionData?.Shipping != 0)
-                pAction.SetShipping (new NSNumber (actionData.Shipping));
+                if (actionData?.Shipping != 0)
+                    pAction.SetShipping (new NSNumber (actionData.Shipping));
 
-            if (!string.IsNullOrEmpty (actionData?.Coupon))
-                pAction.SetCouponCode (actionData.Coupon);
+                if (!string.IsNullOrEmpty (actionData?.Coupon))
+                    pAction.SetCouponCode (actionData.Coupon);
 
-            if (!string.IsNullOrEmpty (actionData?.List))
-                pAction.SetProductActionList (actionData.List);
+                if (!string.IsNullOrEmpty (actionData?.List))
+                    pAction.SetProductActionList (actionData.List);
 
-            if (actionData?.Step != 0)
-                pAction.SetCheckoutStep (new NSNumber (actionData.Step));
+                if (actionData?.Step != 0)
+                    pAction.SetCheckoutStep (new NSNumber (actionData.Step));
 
-            if (!string.IsNullOrEmpty (actionData?.Option))
-                pAction.SetCheckoutOption (actionData.Option);
+                if (!string.IsNullOrEmpty (actionData?.Option))
+                    pAction.SetCheckoutOption (actionData.Option);
+            }
 
             return pAction;
         }

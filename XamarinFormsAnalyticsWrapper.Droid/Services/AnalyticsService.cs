@@ -239,36 +239,39 @@ namespace XamarinFormsAnalyticsWrapper.Droid.Services
         {
             var pAction = new ProductAction (productAction.ToString ());
 
-            if (!string.IsNullOrEmpty (actionData?.Id)
-                && (productAction == ProductActions.purchase
-                    || productAction == ProductActions.refund))
-                return pAction;
-            else
-                pAction.SetTransactionId (actionData.Id);
+            if (actionData != null) {
+                if (string.IsNullOrEmpty (actionData?.Id)
+                    && (productAction == ProductActions.purchase
+                        || productAction == ProductActions.refund)) {
+                    return pAction;
+                } else if (!string.IsNullOrEmpty (actionData?.Id)) {
+                    pAction.SetTransactionId (actionData.Id);
+                }
 
-            if (!string.IsNullOrEmpty (actionData?.Affiliation))
-                pAction.SetTransactionAffiliation (actionData.Affiliation);
+                if (!string.IsNullOrEmpty (actionData?.Affiliation))
+                    pAction.SetTransactionAffiliation (actionData.Affiliation);
 
-            if (actionData?.Revenue != 0)
-                pAction.SetTransactionRevenue (actionData.Revenue);
+                if (actionData?.Revenue != 0)
+                    pAction.SetTransactionRevenue (actionData.Revenue);
 
-            if (actionData?.Tax != 0)
-                pAction.SetTransactionTax (actionData.Tax);
+                if (actionData?.Tax != 0)
+                    pAction.SetTransactionTax (actionData.Tax);
 
-            if (actionData?.Shipping != 0)
-                pAction.SetTransactionShipping (actionData.Shipping);
+                if (actionData?.Shipping != 0)
+                    pAction.SetTransactionShipping (actionData.Shipping);
 
-            if (!string.IsNullOrEmpty (actionData?.Coupon))
-                pAction.SetTransactionCouponCode (actionData.Coupon);
+                if (!string.IsNullOrEmpty (actionData?.Coupon))
+                    pAction.SetTransactionCouponCode (actionData.Coupon);
 
-            if (!string.IsNullOrEmpty (actionData?.List))
-                pAction.SetProductActionList (actionData.List);
+                if (!string.IsNullOrEmpty (actionData?.List))
+                    pAction.SetProductActionList (actionData.List);
 
-            if (actionData?.Step != 0)
-                pAction.SetCheckoutStep (actionData.Step);
+                if (actionData?.Step != 0)
+                    pAction.SetCheckoutStep (actionData.Step);
 
-            if (!string.IsNullOrEmpty (actionData?.Option))
-                pAction.SetCheckoutOptions (actionData.Option);
+                if (!string.IsNullOrEmpty (actionData?.Option))
+                    pAction.SetCheckoutOptions (actionData.Option);
+            }
 
             return pAction;
         }
