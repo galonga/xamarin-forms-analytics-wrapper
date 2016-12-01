@@ -3,7 +3,7 @@
   <metadata>
     <id>xamarin-forms-analytics-wrapper</id>
     <title>Google Analytics Wrapper for Xamarin.Forms</title>
-    <version>0.1.0</version>
+    <version>0.0.1</version>
     <authors>Timo Arndt</authors>
     <owners>Galonga</owners>
     <licenseUrl>https://github.com/galonga/xamarin-forms-analytics-wrapper/blob/master/LICENSE</licenseUrl>
@@ -11,20 +11,19 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>xamarin-forms-analytics-wrapper is a library which warps Google Analytics to Xamarin.Forms. Please check the website for further details.</description>
     <summary>xamarin-forms-analytics-wrapper is a library which warps Google Analytics to Xamarin.Forms.</summary>
-    <releaseNotes>0.1.0:
+    <releaseNotes>0.0.1:
         * Change: Initial
 </releaseNotes>
     <tags>analytics google Analytics tracking xamarin xamarin.forms googleplayservices track galonga wrapper</tags>
     <dependencies>
         <group>
-            <dependency id="Xamarin.Forms" version="2.3.2.127" />
-        </group>
-
-        <group targetFramework="MonoAndroid10">
-            <dependency id="Xamarin.GooglePlayServices.Analytics" version="[29.0.0.2]" />
+            <dependency id="Xamarin.Forms" version="2.3.0.107" />
         </group>
         <group targetFramework="MonoAndroid10">
-            <dependency id="Xamarin.GooglePlayServices.Base" version="[29.0.0.2]" />
+            <dependency id="Xamarin.GooglePlayServices.Analytics" version="[29.0.0.1]" />
+        </group>
+        <group targetFramework="MonoAndroid10">
+            <dependency id="Xamarin.GooglePlayServices.Base" version="[29.0.0.1]" />
         </group>
         <group targetFramework="MonoAndroid10">
             <dependency id="Xamarin.Android.Support.v13" version="[23.3.0]" />
@@ -41,14 +40,14 @@
 
      <!-- Xamarin.Android -->
      <file src="XamarinFormsAnalyticsWrapper.Droid/bin/Release/XamarinFormsAnalyticsWrapper.dll"
-         target="lib/MonoAndroid10/XamarinAnalyticsBindings.dll" />
+         target="lib/MonoAndroid10/XamarinFormsAnalyticsWrapper.dll" />
      <file src="XamarinFormsAnalyticsWrapper.Droid/bin/Release/XamarinFormsAnalyticsWrapper.Droid.dll"
-         target="lib/MonoAndroid10/XamarinAnalyticsBindings.Droid.dll" />
+         target="lib/MonoAndroid10/XamarinFormsAnalyticsWrapper.Droid.dll" />
 
 	   <!-- Xamamarin.iOS -->
      <file src="XamarinFormsAnalyticsWrapper.IOS/bin/Release/XamarinFormsAnalyticsWrapper.dll"
-         target="lib/Xamarin.iOS10/XamarinAnalyticsBindings.dll" />
+         target="lib/Xamarin.iOS10/XamarinFormsAnalyticsWrapper.dll" />
      <file src="XamarinFormsAnalyticsWrapper.IOS/bin/Release/XamarinFormsAnalyticsWrapper.IOS.dll"
-         target="lib/Xamarin.iOS10/XamarinAnalyticsBindings.IOS.dll" />
+         target="lib/Xamarin.iOS10/XamarinFormsAnalyticsWrapper.IOS.dll" />
   </files>
 </package>

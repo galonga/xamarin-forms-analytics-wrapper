@@ -97,46 +97,6 @@ Global
 		{42F501A6-E0C5-4EAE-B379-0F726F413A5B}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		Policies = $0
-		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = PrefixedFlat
-		$1.ResourceNamePolicy = FileFormatDefault
-		$0.StandardHeader = $2
-		$2.Text = 
-		$2.IncludeInNewFiles = True
-		$0.NameConventionPolicy = $3
-		$3.Rules = $4
-		$4.NamingRule = $5
-		$5.Name = Type Parameters
-		$5.AffectedEntity = TypeParameter
-		$5.VisibilityMask = VisibilityMask
-		$5.NamingStyle = PascalCase
-		$5.IncludeInstanceMembers = True
-		$5.IncludeStaticEntities = True
-		$5.RequiredPrefixes = $6
-		$6.String = T
-		$5.RequiredSuffixes = $7
-		$7.String = Exception
-		$0.VersionControlPolicy = $8
-		$8.inheritsSet = Mono
-		$0.TextStylePolicy = $9
-		$9.FileWidth = 120
-		$9.NoTabsAfterNonTabs = True
-		$9.inheritsSet = VisualStudio
-		$9.inheritsScope = text/plain
-		$9.scope = text/x-csharp
-		$0.CSharpFormattingPolicy = $10
-		$10.IndentSwitchSection = True
-		$10.IndentSwitchCaseSection = False
-		$10.NewLineForMembersInObjectInit = True
-		$10.NewLineForMembersInAnonymousTypes = True
-		$10.NewLineForClausesInQuery = True
-		$10.SpacingAfterMethodDeclarationName = False
-		$10.SpaceAfterMethodCallName = False
-		$10.SpaceBeforeOpenSquareBracket = False
-		$10.inheritsSet = Mono
-		$10.inheritsScope = text/x-csharp
-		$10.scope = text/x-csharp
 		version = 0.1.0
 	EndGlobalSection
 EndGlobal
