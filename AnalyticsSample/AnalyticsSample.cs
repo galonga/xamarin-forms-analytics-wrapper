@@ -267,7 +267,7 @@ namespace AnalyticsSample {
 
             //track purchase transaction 
             gaService.TrackScreen(
-                "Transaction Pagen",
+                "Transaction Page",
                 null,
                 gaProductList,
                 ProductActions.purchase,
