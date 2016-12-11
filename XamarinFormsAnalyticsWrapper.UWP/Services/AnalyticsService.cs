@@ -11,12 +11,12 @@ using XamarinFormsAnalyticsWrapper.Enums;
 using XamarinFormsAnalyticsWrapper.Exceptions;
 using XamarinFormsAnalyticsWrapper.Models;
 using XamarinFormsAnalyticsWrapper.Services;
-using XamarinFormsAnalyticsWrapper.WUP.Mapper;
+using XamarinFormsAnalyticsWrapper.UWP.Mapper;
 
-[assembly: Dependency(typeof(XamarinFormsAnalyticsWrapper.WUP.Services.AnalyticsService))]
-namespace XamarinFormsAnalyticsWrapper.WUP.Services
+[assembly: Dependency(typeof(XamarinFormsAnalyticsWrapper.UWP.Services.AnalyticsService))]
+namespace XamarinFormsAnalyticsWrapper.UWP.Services
 {
-    class AnalyticsService : IAnalyticsService
+    public class AnalyticsService : IAnalyticsService
     {
         const string allowTrackingKey = "AllowTracking";
         const long inMicrosMultiply = 1000000;

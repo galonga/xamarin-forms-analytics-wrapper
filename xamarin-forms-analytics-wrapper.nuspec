@@ -33,6 +33,9 @@
         <group targetFramework="xamarin.ios">
             <dependency id="Xamarin.Google.iOS.Analytics" version="[3.17.0]" />
         </group>
+     <group targetFramework="uap10.0">
+	        <dependency id="GoogleAnalytics" version="[1.3.1]" />
+     </group>
     </dependencies>
   </metadata>
   <files>
@@ -51,5 +54,12 @@
          target="lib/Xamarin.iOS10/XamarinFormsAnalyticsWrapper.dll" />
      <file src="XamarinFormsAnalyticsWrapper.IOS/bin/Release/XamarinFormsAnalyticsWrapper.IOS.dll"
          target="lib/Xamarin.iOS10/XamarinFormsAnalyticsWrapper.IOS.dll" />
+
+       <!-- Xamamarin.UWP -->
+     <file src="XamarinFormsAnalyticsWrapper.UWP/bin/Release/XamarinFormsAnalyticsWrapper.dll"
+         target="lib/Portable-Win81+Wpa81/XamarinFormsAnalyticsWrapper.dll" />
+     <file src="XamarinFormsAnalyticsWrapper.UWP/bin/Release/XamarinFormsAnalyticsWrapper.UWP.dll"
+         target="lib/Portable-Win81+Wpa81/XamarinFormsAnalyticsWrapper.UWP.dll" />
+
   </files>
 </package>

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XamarinFormsAnalyticsWrapper.Models;
 
-namespace XamarinFormsAnalyticsWrapper.WUP.Mapper
+namespace XamarinFormsAnalyticsWrapper.UWP.Mapper
 {
     class AnalyticsProductMapper
     {

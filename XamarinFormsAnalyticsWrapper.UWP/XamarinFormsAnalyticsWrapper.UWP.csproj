@@ -7,8 +7,8 @@
     <ProjectGuid>{9BD64B5B-5326-4D85-8BA7-2865A9C91D17}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XamarinFormsAnalyticsWrapper.WUP</RootNamespace>
-    <AssemblyName>XamarinFormsAnalyticsWrapper.WUP</AssemblyName>
+    <RootNamespace>XamarinFormsAnalyticsWrapper.UWP</RootNamespace>
+    <AssemblyName>XamarinFormsAnalyticsWrapper.UWP</AssemblyName>
     <DefaultLanguage>de-DE</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -110,7 +110,9 @@
     <Compile Include="Mapper\AnalyticsProductMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AnalyticsService.cs" />
-    <EmbeddedResource Include="Properties\XamarinFormsAnalyticsWrapper.WUP.rd.xml" />
+    <EmbeddedResource Include="Properties\XamarinFormsAnalyticsWrapper.UWP.rd.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XamarinFormsAnalyticsWrapper\XamarinFormsAnalyticsWrapper.csproj">
