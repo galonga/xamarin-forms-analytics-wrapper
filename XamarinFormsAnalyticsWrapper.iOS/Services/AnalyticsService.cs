@@ -118,12 +118,12 @@ namespace XamarinFormsAnalyticsWrapper.iOS.Services
                     var product = mapper.mapProduct(p);
                     switch (productAction) {
                         case ProductActions.none:
-                        builder.AddProductImpression(product, screenName, "App");
-                        break;
+                            builder.AddProductImpression(product, screenName, "App");
+                            break;
                         default:
-                        builder.SetProductAction(generateCheckoutProductAction(actionData, productAction));
-                        builder.AddProduct(product);
-                        break;
+                            builder.SetProductAction(generateCheckoutProductAction(actionData, productAction));
+                            builder.AddProduct(product);
+                            break;
                     }
                 }
             }
@@ -173,13 +173,18 @@ namespace XamarinFormsAnalyticsWrapper.iOS.Services
         }
 
         public void TrackTiming(
-            string categroy,
-            string label,
-            long value,
-            string variable
+           string categroy,
+           string label,
+           long value,
+           string variable
         )
         {
-            analyticsTracker.Send(DictionaryBuilder.CreateTiming(categroy, new NSNumber(value), label, variable).Build());
+            analyticsTracker.Send(DictionaryBuilder.CreateTiming(
+                categroy,
+                new NSNumber(value),
+                variable,
+                label
+            ).Build());
         }
 
         public void SetCurrencyCode(string currencyCode)
