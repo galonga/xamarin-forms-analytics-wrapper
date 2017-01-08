@@ -3,7 +3,7 @@
   <metadata>
     <id>xamarin-forms-analytics-wrapper</id>
     <title>Google Analytics Wrapper for Xamarin.Forms</title>
-    <version>0.0.1</version>
+    <version>0.1.1</version>
     <authors>Timo Arndt</authors>
     <owners>Galonga</owners>
     <licenseUrl>https://github.com/galonga/xamarin-forms-analytics-wrapper/blob/master/LICENSE</licenseUrl>
@@ -11,8 +11,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>xamarin-forms-analytics-wrapper is a library which warps Google Analytics to Xamarin.Forms. Please check the website for further details.</description>
     <summary>xamarin-forms-analytics-wrapper is a library which warps Google Analytics to Xamarin.Forms.</summary>
-    <releaseNotes>0.0.1:
-        * Change: Initial
+    <releaseNotes>0.1.1:
+        * Change: fix iOS timing tracking
+0.1.0:
+        * Change: Initial release
 </releaseNotes>
     <tags>analytics google Analytics tracking xamarin xamarin.forms googleplayservices track galonga wrapper</tags>
     <dependencies>
