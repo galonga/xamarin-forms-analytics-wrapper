@@ -33,6 +33,21 @@ public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary
 }
 ```
 
+#### FAKE options / Tasks
+
+Execute `bin/fake <taskname>` to run a task or `bin/fake --<optionname>` for fake cli options. First run `bin/fake install`.
+
+Available tasks:
+
+```
+* Restore
+  Clean solution and afterwards restore all packages
+
+* Build
+  Build all projects of solution
+
+```
+
 ###Create Nuget Package
 
 Add changes to ```xamarin-forms-analytics-wrapper.nuspec``` file and create package with following command:
