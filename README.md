@@ -6,7 +6,7 @@ xamarin-forms-analytics-wrapper is a library which warps Google Analytics tracki
 I'm very eager about your feedback, so do not hesitate to create an issue or feel free to improve my code via a contribution.
 
 ###Setup and Usage
-1. Install the [package via nuget]() into your PCL and platform specific projects.
+1. Install the [package via nuget](https://www.nuget.org/packages/xamarin-forms-analytics-wrapper/) into your PCL and platform specific projects.
 2. Get your Analytics-Id (iOS AppDelegate.cs, Android: MainActivity.cs)
 2. Add the registration call to your platform specific main class (see sample).
 
@@ -32,6 +32,7 @@ public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary
     gaService.OptOut = false;
 }
 ```
+More examples on my [blog](https://galonga.de/xamarin-forms-analytics-wrapper/).
 
 #### FAKE options / Tasks
 
